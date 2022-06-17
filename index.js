@@ -1,5 +1,31 @@
 const root = document.getElementById("root");
 const menu = ["home", "about", "contact", "Login", "Cart"];
+const products = [
+  {
+    id: 1,
+    name: "Product 1",
+    price: 100,
+    description: "Description 1",
+    featured: true,
+    image: "https://via.placeholder.com/150",
+  },
+  {
+    id: 1,
+    name: "Product 1",
+    price: 100,
+    description: "Description 1",
+    featured: true,
+    image: "https://via.placeholder.com/150",
+  },
+  {
+    id: 1,
+    name: "Product 1",
+    price: 100,
+    description: "Description 1",
+    featured: true,
+    image: "https://via.placeholder.com/150",
+  },
+];
 
 function nav(menu) {
   let navBar = document.createElement("nav");
@@ -26,9 +52,39 @@ function featuredProducts(products) {
   let h2 = document.createElement("h2");
   h2.innerHTML = "Featured Products";
   featured.appendChild(h2);
+  const productsContainer = document.createElement("div");
+  productsContainer.className = "grid";
+  products.forEach(function (product) {
+    const productContainer = document.createElement("div");
+    productContainer.className = "product";
+    const productImage = document.createElement("img");
+    productImage.src = product.image;
+    productContainer.appendChild(productImage);
+    const productName = document.createElement("h3");
+    productName.innerHTML = product.name;
+    productContainer.appendChild(productName);
+    const productPrice = document.createElement("p");
+    productPrice.innerHTML = product.price;
+    productContainer.appendChild(productPrice);
+    const productDescription = document.createElement("p");
+    productDescription.innerHTML = product.description;
+    productContainer.appendChild(productDescription);
+    productsContainer.appendChild(productContainer);
+  });
+  featured.appendChild(productsContainer);
   return featured;
+}
+
+function footer() {
+  let footer = document.createElement("footer");
+  footer.className = "footer";
+  let p = document.createElement("p");
+  p.innerHTML = "Shopping &copy; 2022";
+  footer.appendChild(p);
+  return footer;
 }
 
 root.appendChild(nav(menu));
 root.appendChild(hero());
-root.appendChild(featuredProducts());
+root.appendChild(featuredProducts(products));
+root.appendChild(footer());
