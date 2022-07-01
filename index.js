@@ -1,5 +1,12 @@
 const root = document.getElementById("root");
-const menu = ["home", "about", "contact", "Login", "Cart"];
+const menu = [
+  { title: "home", link: "/" },
+  { title: "about", link: "/about" },
+  { title: "contact", link: "/contact" },
+  { title: "Login", link: "/login" },
+  { title: "Cart", link: "/cart" },
+];
+
 const products = [
   {
     id: 1,
@@ -31,8 +38,9 @@ function nav(menu) {
   let navBar = document.createElement("nav");
   for (let item in menu) {
     const a = document.createElement("a");
-    a.innerHTML = menu[item];
+    a.innerHTML = menu[item].title;
     navBar.appendChild(a);
+    a.href = menu[item].link;
   }
   return navBar;
 }
@@ -69,12 +77,21 @@ function featuredProducts(products) {
     const productDescription = document.createElement("p");
     productDescription.innerHTML = product.description;
     productContainer.appendChild(productDescription);
+    const btn = document.createElement("button");
+    btn.innerHTML = "Add to cart";
+    productContainer.appendChild(btn);
+    btn.addEventListener("click", function () {
+      addToCart(product);
+    });
     productsContainer.appendChild(productContainer);
   });
   featured.appendChild(productsContainer);
   return featured;
 }
-
+function addToCart(product) {
+  localStorage.setItem(product.id, JSON.stringify(product));
+  alert(`${product.name} added to cart`);
+}
 function footer() {
   let footer = document.createElement("footer");
   footer.className = "footer";
